@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const http = axios.create({
-    baseURL:  `http://localhost:80/api/`, 
+    baseURL:  `http://localhost:80/MyLTWEB/bookseller/API/`, 
     timeout: 10000, 
 });
 

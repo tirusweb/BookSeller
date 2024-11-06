@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../image/logo.png";
+import logo from "../../../image//book2.jpg";
 import face from "../../../image/Facebook-on.webp";
 import insta from "../../../image/Insta-on.webp";
 import Linkin from "../../../image/twitter-on.webp";
@@ -22,13 +22,13 @@ const Footer = () => {
                 <div className=" flex items-center justify-start ">
                   <Link to="/">
                     <img
-                      className="pl-4 h-[50px] w-auto object-cover"
+                      className="pl-4 h-[100px] w-auto object-cover"
                       src={logo}
                       alt="Logo Bán Sách"
                     />
                   </Link>
                   <p className=" uppercase mt-6 font-bold text-2xl ml-1 text-red-500">
-                    Sachhay.com
+                    {/* Sachhay.com */}
                   </p>
                 </div>
                 <div className="">
@@ -36,20 +36,21 @@ const Footer = () => {
                     {" "}
                     Trang web được thực hiện bởi 2 thành viên nhóm 7 gồm :{" "}
                   </p>
-                  <p className=" font-medium text-gray-600 text-sm ">
+                  <p className=" font-medium text-red-700 text-sm ">
                     {" "}
-                    - Nguyễn Trung Hiếu
+                    - Nguyễn Trung Hiếu - 21103100097
                   </p>
-                  <p className="font-medium text-gray-600 text-sm ">
+                  <p className="font-medium text-red-700 text-sm ">
                     {" "}
-                    - Trần Thị Hồng
+                    - Trần Thị Hồng - 211031000098
                   </p>
                 </div>
                 <div className=" mt-1">
                   <p className=" text-justify tex-sm font-normal">
-                    SACHHAY.com nhận đặt hàng trực tuyến và giao hàng tận nơi.
-                    KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng
-                    cũng như tất cả Hệ Thống SachHay trên toàn quốc.
+                    <span className=" font-bold">Book HuH</span> nhận đặt hàng
+                    trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và
+                    nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống
+                    SachHay trên toàn quốc.
                   </p>
                 </div>
                 <div className=" mt-4 flex items-center justify-start">
@@ -119,7 +120,7 @@ const Footer = () => {
               </Link>
               <Link to="">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  Giới thiệu Fahasa
+                  Giới thiệu BookHuH
                 </p>
               </Link>
               <Link to="">
@@ -158,24 +159,24 @@ const Footer = () => {
               <h1 className=" mt-4 mb-3 font-semibold text-sm text-black uppercase">
                 tài khoản của tôi
               </h1>
-              <Link to="">
+              <Link to="/register">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
                   Đăng nhập/Tạo mới tài khoản
                 </p>
               </Link>
-              <Link to="">
+              <Link to="/thay-doi-dia-chi">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
                   Thay đổi địa chỉ khách hàng
                 </p>
               </Link>
-              <Link to="">
+              <Link to="/ho-so-ca-nhan">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
                   Chi tiết tài khoản
                 </p>
               </Link>
-              <Link to="">
+              <Link to="/don-hang-cua-toi">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  CLịch sử mua hàng
+                  Lịch sử mua hàng
                 </p>
               </Link>
             </div>
@@ -232,7 +233,7 @@ const Footer = () => {
                 </svg>
 
                 <p className=" mt-2 ml-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  nguyentrunghieuit03@gmail.com
+                  nguyenhieu03@gmail.com
                 </p>
               </Link>
             </div>
@@ -268,168 +269,26 @@ const Footer = () => {
             </div>
             <div className="col-start-3 col-span-1">
               <Link to="" className=" flex items-center justify-start">
-                <img src={dt1} className=" h-[50px]" alt="Lazada"/>
+                <img src={dt1} className=" h-[50px]" alt="Lazada" />
               </Link>
             </div>
             <div className="col-start-4 col-span-1">
               {" "}
               <Link to="" className=" flex items-center justify-start">
-                <img src={dt2} className=" h-[50px]" alt="Shopee"/>
+                <img src={dt2} className=" h-[50px]" alt="Shopee" />
               </Link>
             </div>
             <div className="col-start-5 col-span-1">
               {" "}
               <Link to="" className=" flex items-center justify-start">
-                <img src={dt3} className=" h-[70px]" alt="Tiktok"/>
+                <img src={dt3} className=" h-[70px]" alt="Tiktok" />
               </Link>
             </div>
           </div>
-          <div className="  grid grid-cols-5 mt-4 gap-4 mx-6">
-            <div className="  col-span-5">
-              <h1 className=" mt-4 mb-1 font-semibold text-sm text-black uppercase ">
-                {" "}
-                Thường được tìm kiếm
-              </h1>
-            </div>
-            <div className=" col-span-1">
-              <Link to="">
-                <p className=" text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  truyện dan brown
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách hay về gia đình
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sach hoc tieng trung
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách blockchain
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách khởi nghiệp
-                </p>
-              </Link>
-            </div>
-            <div className=" col-span-1">
-              <Link to="">
-                <p className=" text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  truyện dan brown
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách hay về gia đình
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sach hoc tieng trung
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách blockchain
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách khởi nghiệp
-                </p>
-              </Link>
-            </div>
-            <div className=" col-span-1">
-              <Link to="">
-                <p className=" text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  truyện dan brown
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách hay về gia đình
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sach hoc tieng trung
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách blockchain
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách khởi nghiệp
-                </p>
-              </Link>
-            </div>
-            <div className=" col-span-1">
-              <Link to="">
-                <p className=" text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  truyện dan brown
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách hay về gia đình
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sach hoc tieng trung
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách blockchain
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách khởi nghiệp
-                </p>
-              </Link>
-            </div>
-            <div className=" col-span-1">
-              <Link to="">
-                <p className=" text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  truyện dan brown
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách hay về gia đình
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sach hoc tieng trung
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách blockchain
-                </p>
-              </Link>
-              <Link to="">
-                <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
-                  sách khởi nghiệp
-                </p>
-              </Link>
-            </div>
-          </div>
+        
         </div>
         <div className="flex justify-center items-center text-gray-500 py-4">
-        © copyright : nguyentrunghieu&tranthihong
+          © copyright : nguyentrunghieu&tranthihong
         </div>
       </div>
     </>

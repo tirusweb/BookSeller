@@ -6,18 +6,21 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [fullname, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false); // To show success popup
   const navigate = useNavigate();
+  
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   };
   const handleSubmit = async () => {
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !fullname || !phone || !password || !confirmPassword) {
       setError("Vui lòng điền đầy đủ thông tin.");
       return;
     }
@@ -29,14 +32,14 @@ const Register = () => {
       setError("Mật khẩu nhập lại không khớp.");
       return;
     }
-    const data = { name, email, password };
+    const data = { name, fullname , phone, email, password };
 
     try {
       const response = await apiPostUser(data);
       if (response.status === 1) {
         setShowSuccessPopup(true);
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 2000);
       } else {
         setError(response.msg);
@@ -49,22 +52,22 @@ const Register = () => {
   return (
     <>
       <div className="w-screen flex items-center justify-center h-screen bg-blue-100">
-        <div className="lg:w-[80%] lg:h-[80%] xs:w-[100%] xs:h-[100%] my-0 mx-auto bg-cyan-400 shadow-xl rounded">
+        <div className="lg:w-[90%] lg:h-[90%] xs:w-[100%] xs:h-[100%] my-0 mx-auto bg-cyan-400 shadow-xl rounded">
           <div className="h-full grid grid-cols-5">
             <div className="lg:block xs:hidden col-span-3">
               <div className="flex-col flex items-center justify-center h-full bg-white">
-                <h2 className="text-center font-bold text-cyan-500">
-                  CHÀO BẠN ĐỌC ĐẾN VỚI SACHHAY.COM
+                <h2 className="text-center uppercase font-bold text-cyan-500">
+                  CHÀO BẠN ĐỌC ĐẾN VỚI bookhuh.COM
                 </h2>
                 <img src={pia} className="lg:w-[500px] h-auto" alt="Edu" />
               </div>
             </div>
             <div className="h-full w-full flex items-center justify-center xs:col-span-5 lg:col-span-2">
-              <div className="h-[90%] w-[90%] bg-cyan-600 shadow-xl lg:mx-auto lg:my-0 rounded-xl">
+              <div className="h-[96%] w-[96%] bg-cyan-600 shadow-xl lg:mx-auto lg:my-0 rounded-xl">
                 <h2 className="lg:hidden xs:block mt-3 text-center font-bold text-cyan-800">
                   CHÀO BẠN ĐỌC ĐẾN VỚI SACHHAY.COM
                 </h2>
-                <h2 className="text-center mt-2 text-white font-bold">
+                <h2 className="text-center uppercase mt-2 text-white font-bold">
                   ĐĂNG Ký TÀI KHOẢN
                 </h2>
 
@@ -73,29 +76,49 @@ const Register = () => {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Tên người dùng..."
+                    required
+                  />
+                    <input
+                    type="email"
+                    value={fullname}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    placeholder="Nhập họ tên..."
+                    required
+                  />
+                    <input
+                    type="email"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    placeholder="Nhập số điện thoại..."
+                    required
                   />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Nhập email..."
+                    required
                   />
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Mật khẩu..."
+                    required
                   />
                   <input
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
-                    placeholder="Xác nhận mật khẩu..."
+                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                   placeholder="Xác nhận mật khẩu..."
+                   required
                   />
 
                   {error && (
@@ -114,14 +137,14 @@ const Register = () => {
 
                   <button
                     onClick={handleSubmit}
-                    className="w-[90%] px-4 py-2 mt-4 bg-cyan-500 text-white font-bold rounded-md hover:text-cyan-500 hover:bg-white"
+                    className="w-[90%] px-4 py-2 mt-2 bg-cyan-500 text-white font-bold rounded-md hover:text-cyan-500 hover:bg-white"
                   >
                     Đăng Ký
                   </button>
                   <div className="flex items-center mt-2">
                     <p className="text-white text-sm">Bạn đã có tài khoản?</p>
                     <a
-                      href="/"
+                      href="/login"
                       className="text-sm ml-2 font-medium text-cyan-900 hover:text-white"
                     >
                       Đăng nhập

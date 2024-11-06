@@ -1,22 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import logo from "../../../image/logo.png";
+import logo from "../../../image/book2.jpg";
 import avatar from "../../../image/avatar.jpg";
 import { Link, useNavigate } from "react-router-dom";
-
+import { apigetCartlBook } from "../../../services/Cartbook/Cartbook";
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const [Cart, setCart] = useState([]);
   const [username, setUsername] = useState(
     localStorage.getItem("user") || "Tài khoản"
   );
 
-  const handleHome = () => navigate("/home");
-  const handleNotifi = () => navigate("/ghi-chu-nhac-nho");
+  const handleHome = () => navigate("/gio-hang-san-pham");
+  const handleNotifi = () => navigate("/thong-bao");
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    navigate("/");
+    localStorage.removeItem("idcus");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -34,6 +36,29 @@ const Header = () => {
     };
   }, [isShow]);
 
+  const fetchBooks = async () => {
+    try {
+      const response = await apigetCartlBook(username);
+      if (response.data.status === 1) {
+        const booksWithQuantity = response.data.books.map((book) => ({
+          ...book,
+          quantity: 1,
+        }));
+        setCart(booksWithQuantity);
+      } else {
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, [username]);
+
+  const [title , setTitle] = useState("");
+  const handleSearch = () => {
+    navigate(`/tim-kiem/${title}`);
+  };
+
   return (
     <>
       <div className=" z-30 containe fixed left-0 right-0">
@@ -42,13 +67,13 @@ const Header = () => {
             <div className=" flex items-start justify-start ">
               <Link to="/">
                 <img
-                  className="pl-4 h-[50px] w-auto object-cover"
+                  className="pl-4 h-[56px] mt-1 w-auto object-cover"
                   src={logo}
                   alt="Logo Bán Sách"
                 />
               </Link>
               <p className=" uppercase mt-6 font-bold text-xl ml-1 text-red-500">
-                Sachhay.com
+                {/* Book HUH */}
               </p>
             </div>
 
@@ -57,9 +82,11 @@ const Header = () => {
                 <input
                   className="ml-2 flex-1 text-sm px-2 outline-none border-none "
                   type="text"
-                  placeholder="Đắc nhân tâm"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Tìm kiếm sản phẩm ..."
                 />
-                <div className=" bg-red-500  px-4 mr-2 rounded py-1 hover:bg-red-400 cursor-pointer ">
+                <div onClick={handleSearch} className=" bg-red-700  px-4 mr-2 rounded py-1 hover:bg-red-600 cursor-pointer ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -79,10 +106,11 @@ const Header = () => {
             </div>
 
             <div className="flex flex-1 pr-4 fle font-semibold items-center justify-end text-gray-500 mr-4 mt-3">
-              <div
-                onClick={handleNotifi}
+              <a
+              href="/thong-bao"
                 className=" cursor-pointer xs:hidden lg:block"
               >
+              
                 <div className="flex mr-4 text-sm ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,10 +128,10 @@ const Header = () => {
                   </svg>
                   Thông báo
                 </div>
-              </div>
-              <div className=" xs:hidden lg:block">
-                <div
-                  onClick={handleHome}
+              </a>
+              <div className=" relative xs:hidden lg:block">
+                <a
+                href="/gio-hang-san-pham"
                   className="flex mr-4 cursor-pointer  text-sm"
                 >
                   <svg
@@ -121,7 +149,10 @@ const Header = () => {
                     />
                   </svg>
                   Giỏ hàng
-                </div>
+                </a>
+                <p className=" left-2 absolute top-[-10px] bg-red-600  rounded-full text-center w-5 h-5 text-xs shadow-lg  text-white ">
+                  {Cart.length}
+                </p>
               </div>
               <div>
                 <div
@@ -137,30 +168,47 @@ const Header = () => {
                     {username}
                   </span>
                 </div>
-                <div
-                  ref={menuRef}
-                  className={` ${
-                    isShow ? " block" : " hidden"
-                  }  bg-white shadow-xl w-auto  fixed top-[64px] rounded right-2`}
-                >
-                  <ul>
-                    <li className="text-gray-500 px-6 py-2 cursor-pointer  hover:bg-gray-200 border-b border-solid border-gray-100 font-normal mt-2 text-sm">
-                      <Link to={"/thong-tin-sinh-vien"}>Thông tin cá nhân</Link>
-                    </li>
-                    <li
-                      //   onClick={openModal}
-                      className="text-gray-500 px-6 py-2 cursor-pointer hover:bg-gray-200 border-b border-solid border-gray-100 font-normal mt-2 text-sm"
-                    >
-                      <Link>Đổi mật khẩu</Link>
-                    </li>
-                    <li
-                      onClick={handleLogout}
-                      className="text-gray-500 px-6 py-2 cursor-pointer hover:bg-gray-200 border-b border-solid border-gray-100 font-normal mt-2 text-sm"
-                    >
-                      Đăng xuất
-                    </li>
-                  </ul>
-                </div>
+                {username !== "Tài khoản" ? (
+                  <div
+                    ref={menuRef}
+                    className={` ${
+                      isShow ? " block" : " hidden"
+                    }  bg-white shadow-xl w-auto  fixed top-[64px] rounded right-2`}
+                  >
+                    <ul>
+                      <li className="text-gray-500 px-6 py-2 cursor-pointer  hover:bg-gray-200 border-b border-solid border-gray-100 font-normal mt-2 text-sm">
+                        <Link to={"/ho-so-ca-nhan"}>
+                          Thông tin cá nhân
+                        </Link>
+                      </li>
+                      <li className="text-gray-500 px-6 py-2 cursor-pointer hover:bg-gray-200 border-b border-solid border-gray-100 font-normal mt-2 text-sm">
+                        <Link to={"/doi-mat-khau"} >Đổi mật khẩu</Link>
+                      </li>
+                      <li
+                        onClick={handleLogout}
+                        className="text-gray-500 px-6 py-2 cursor-pointer hover:bg-gray-200 border-b border-solid border-gray-100 font-normal mt-2 text-sm"
+                      >
+                        Đăng xuất
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <div
+                    ref={menuRef}
+                    className={` ${
+                      isShow ? " block" : " hidden"
+                    }   shadow-xl bg-white px-4 py-2 w-auto fixed top-[64px] rounded right-2`}
+                  >
+                    <ul>
+                      <li className="text-white px-10 py-2 cursor-pointer bg-red-600 rounded-lg shadow-lg border-b border-solid font-semibold mt-2 text-sm">
+                        <Link to={"/login"}>Đăng nhập</Link>
+                      </li>
+                      <li className="text-red-600 shadow-lg px-10 py-2 border-2 border-red-600  text-center  cursor-pointe rounded-lg font-semibold border-solid  mt-2 text-sm">
+                        <Link to={"/register"}>Đăng ký</Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>

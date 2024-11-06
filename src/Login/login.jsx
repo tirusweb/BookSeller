@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
       if (response.data.status === 1) {
         localStorage.setItem("user", username);
         onLogin(); 
-        navigate("/home");
+        navigate("/");
       } else {
         setError(response.data.msg);
       }
@@ -91,7 +91,6 @@ const Login = ({ onLogin }) => {
                       {error}
                     </p>
                   )}
-
                   <button
                     onClick={handleSubmit}
                     className="w-[90%] px-4 py-2 mt-4 bg-cyan-500 text-white font-bold rounded-md hover:text-cyan-500 hover:bg-white"
