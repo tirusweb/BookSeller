@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { apiPostContact } from "../../services/Contact/Contact";
 import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
+import { toast, ToastContainer } from "react-toastify";
 const Contact = () => {
   const [title, setTitle] = useState("");
   const [descript, setDescript] = useState("");
@@ -26,9 +27,10 @@ const Contact = () => {
     try{
         const response = await apiPostContact(data);
         if(response.data.status === 1){
-           setShowPopup(true);
+          toast.success("Bạn đã gửi liên hệ thành công");
         }else{
-           setShowFalse(true);
+          toast.error(" gửi liên hệ thất bại");
+
         }
     }catch(error){
         setError(" Lỗi khi gửi liên hệ ");
@@ -38,6 +40,7 @@ const Contact = () => {
   return (
     <>
       <div>
+      <ToastContainer position="top-right"/>
         <div className=" w-screen">
           <div className=" mx-14 my-8">
             <div className=" grid grid-cols-10 gap-2">

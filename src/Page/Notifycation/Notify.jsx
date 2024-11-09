@@ -1,26 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { apiGetNotify } from "../../services/Notify/Notify";
+import { apiGetNotify, apiGetNotifyByUser } from "../../services/Notify/Notify";
 
 const Notify = () => {
   const [notify, setNotify] = useState([]);
   const [error, setError] = useState(null);
   const [isShow, setIsShow] = useState(null);
+  const [username, setUsername] = useState(
+    localStorage.getItem("user") || "Tài khoản"
+  );
 
   useEffect(() => {
     const getNotify = async () => {
       try {
-        const response = await apiGetNotify();
-        if (response.data.status === 1) {
-          setNotify(response.data.books);
+        const [responseForTrungHieu, responseForCurrentUser] = await Promise.all([
+          apiGetNotifyByUser("admin"),
+          apiGetNotifyByUser(username)
+        ]);
+
+        let combinedNotifications = [];
+        let errors = [];
+
+        // Kiểm tra phản hồi cho "trung hiếu"
+        if (responseForTrungHieu.data.status === 1) {
+          combinedNotifications = [...combinedNotifications, ...responseForTrungHieu.data.notifications];
         } else {
-          setError(response.data.msg);
+          errors.push(responseForTrungHieu.data.msg);
         }
+
+        // Kiểm tra phản hồi cho người dùng hiện tại
+        if (responseForCurrentUser.data.status === 1) {
+          combinedNotifications = [...combinedNotifications, ...responseForCurrentUser.data.notifications];
+        } else {
+          errors.push(responseForCurrentUser.data.msg);
+        }
+
+        // Cập nhật notify với dữ liệu kết hợp
+        setNotify(combinedNotifications);
+
+        // Cập nhật tất cả lỗi nếu có
+        if (errors.length > 0) {
+          setError(errors.join(' | '));
+        }
+
       } catch (error) {
         setError("Lỗi khi gọi API!");
       }
     };
+
     getNotify();
-  }, []);
+  }, [username]);
+  
 
   const handleShow = (id) => {
     if (isShow === id) {

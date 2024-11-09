@@ -3,6 +3,7 @@ import { apiGetUser, apiUpdateUser } from "../../services/User/User";
 import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const Infor = () => {
   const [error, setError] = useState(null);
@@ -40,9 +41,9 @@ const Infor = () => {
   
       // Kiểm tra giá trị status trong response.data
       if (response.data.status === 1) {
-        setShowPopup(true); // Hiển thị popup khi cập nhật thành công
+        toast.success("Cập nhật thông tin thành công!")
       } else {
-        setShowFalse(true); // Hiển thị popup lỗi nếu thất bại
+        toast.error("Cập nhật thông tin thất bại!")
       }
     } catch (error) {
       setError("Đã xảy ra lỗi khi cập nhật thông tin. Vui lòng thử lại.");
@@ -75,6 +76,7 @@ const Infor = () => {
   return (
     <>
       <div className="">
+      <ToastContainer position="top-right" />
         <div className=" w-screen">
           <div className=" mx-14 my-8">
             <div className="">

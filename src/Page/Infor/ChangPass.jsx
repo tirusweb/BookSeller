@@ -3,6 +3,7 @@ import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
 import { apiChangPass } from "../../services/User/User";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ChangPass = () => {
   const [error, setError] = useState(null);
@@ -56,14 +57,15 @@ const ChangPass = () => {
       const response = await apiChangPass(data); // Gửi dữ liệu lên API để cập nhật mật khẩu
 
       if (response.data.status === 1) {
-        setShowPopup(true);
+        toast.success("Thay đổi mật khẩu thành công !")
         setPass("");
         setPassNew("");
         setRePass("");
         setError(null);
       } else {
         setError(response.data.msg); // Cập nhật thông báo lỗi từ server
-        setShowFalse(true); // Hiển thị popup lỗi nếu thất bại
+        toast.error("Thay đổi mật khẩu thất bại !")
+
       }
     } catch (error) {
       setError("Đã xảy ra lỗi khi cập nhật mật khẩu. Vui lòng thử lại.");

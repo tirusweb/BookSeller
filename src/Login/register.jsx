@@ -16,7 +16,7 @@ const Register = () => {
   
 
   const validateEmail = (email) => {
-    const re = /\S+@\S+\.\S+/;
+    const re =  /^\S+@\S+\.\S+$/;
     return re.test(email);
   };
   const handleSubmit = async () => {
@@ -24,6 +24,16 @@ const Register = () => {
       setError("Vui lòng điền đầy đủ thông tin.");
       return;
     }
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const regexPhoneNumber = /(0|0[3|5|7|8|9])+([0-9]{8})\b/g;
+    if (!password.match(passwordRegex)) {
+      setError("Mật khẩu mới phải có ít nhất 8 ký tự, bao gồm cả chữ thường , chữ in hoa và số.");
+      return;
+  }
+  if (!phone.match(regexPhoneNumber)) {
+    setError("Nhập sai số điện thoại.");
+    return;
+}
     if (!validateEmail(email)) {
       setError("Email không hợp lệ.");
       return;

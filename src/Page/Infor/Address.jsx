@@ -8,6 +8,7 @@ import {
 
 import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
+import { toast, ToastContainer } from "react-toastify";
 
 const Address = () => {
   const [city, setCity] = useState([]);
@@ -109,11 +110,12 @@ const Address = () => {
     try {
       const response = await apiPostCustomer(data);
       if (response.data.status === 1) {
-       setShowPopup(true);
+      toast.success("Thêm địa chỉ nhận hàng thành công")
        localStorage.setItem("idcus" , response.data.idcus);
        console.log(response.data.idcus);
       } else {
-        setShowFalse(true)
+        toast.error("Thêm địa chỉ nhận hàng thất bại")
+
       }
     } catch (error) {
       setError("lỗi API ");
@@ -123,6 +125,7 @@ const Address = () => {
   return (
     <>
       <div className="w-screen">
+      <ToastContainer position="top-right" />
         <div className="mx-14 my-8">
           <div className="grid grid-cols-10 gap-4">
             <div className="col-span-3 row-span-1">
@@ -311,7 +314,7 @@ const Address = () => {
             </div>
           </div>
         </div>
-        {isPopup && (
+        {/* {isPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-lg">
             <div className=" flex-col items-center justify-center">
@@ -360,7 +363,7 @@ const Address = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
       </div>
     </>
   );

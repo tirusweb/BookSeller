@@ -58,7 +58,7 @@ const Login = ({ onLogin }) => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="w-[90%] px-4 py-2 mt-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
-                    placeholder="Tên người dùng..."
+                    placeholder="Tên tài khoản..."
                   />
                   <input
                     type="password"

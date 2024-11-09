@@ -50,12 +50,6 @@ const Modaldt = ({ onclose }) => {
               </p>
               <p className=" mt-2 text-justify"> Số lượng sản phẩm.</p>
               <p className=" mt-2 text-justify">
-                {" "}
-                Thông tin sản phẩm, người nhận (Đối chiếu với thông tin trên
-                phiếu giao hàng được bỏ trong hộp) trong lúc nhận hàng trước khi
-                ký nhận và thanh toán tiền cho nhân viên giao nhận.
-              </p>
-              <p className=" mt-2 text-justify">
                 <p className=" mt-2 text-justify">
                   {" "}
                   Thông tin sản phẩm, người nhận (Đối chiếu với thông tin trên
@@ -64,7 +58,7 @@ const Modaldt = ({ onclose }) => {
                 </p>
                 <p className=" mt-2 text-justify">
                   {" "}
-                  Khi quý khách hàng có hàng hóa mua tại Fahasa.comcần đổi/
+                  Khi quý khách hàng có hàng hóa mua tại BookHuH cần đổi/
                   trả/bảo hành/hoàn tiền, xin quý khách hàng liên hệ với chúng
                   tôi qua hotline 1900636467 để tìm hiểu thêm về chính sách
                   đổi/trả.

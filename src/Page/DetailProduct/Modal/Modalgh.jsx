@@ -34,13 +34,13 @@ const modalgh = ({ onclose }) => {
               <p className=" text-justify">
                 Với đa phần đơn hàng, BookHuH cần vài giờ làm việc để kiểm tra
                 thông tin và đóng gói hàng. Nếu các sản phẩm đều có sẵn hàng,
-                Fahasa.com sẽ nhanh chóng bàn giao cho đối tác vận chuyển. Nếu
-                đơn hàng có sản phẩm sắp phát hành, Fahasa.com sẽ ưu tiên giao
+                Bookhuh sẽ nhanh chóng bàn giao cho đối tác vận chuyển. Nếu
+                đơn hàng có sản phẩm sắp phát hành, Bookhuh sẽ ưu tiên giao
                 những sản phẩm có hàng trước cho Quý khách hàng.
                 <br />
-                rong một số trường hợp, hàng nằm không có sẵn tại kho gần nhất,
+                Trong một số trường hợp, hàng nằm không có sẵn tại kho gần nhất,
                 thời gian giao hàng có thể chậm hơn so với dự kiến do điều hàng.
-                Các phí vận chuyển phát sinh, Fahasa.com sẽ hỗ trợ hoàn toàn.
+                Các phí vận chuyển phát sinh, Bookhuh sẽ hỗ trợ hoàn toàn.
                 <br />
                 Thời gian giao hàng không tính thứ 7, Chủ nhật, các ngày Lễ, Tết
                 và không bao gồm tuyến huyện đảo xa.
@@ -51,24 +51,11 @@ const modalgh = ({ onclose }) => {
               </p>
               <p className=" font-medium"> 1. Nội thành TP.HCM và Hà Nội</p>
               <p> Thời gian: 1-2 ngày</p>
-              <p>
-                {" "}
-                Chi phí: 20.000 đồng cho 2 kg đầu tiên. Phụ thu 2.000 đồng cho
-                mỗi ký tiếp theoy
-              </p>
               <p className=" font-medium"> 2. Các tỉnh thành khác</p>
               <p> Thời gian: 2-3 ngày</p>
               <p>
                 {" "}
-                Chi phí: 32.000 đồng cho 2 kg đầu tiên. Phụ thu 3.000 đồng cho
-                mỗi ký tiếp theo
-              </p>
-              <p>
-                {" "}
-                Lưu ý: Từ ngày 20/06/2022, BookHuH sẽ phụ thu thêm 7.000đ cho
-                đơn hàng chứa sản phẩm Tập học sinh (số lượng từ 5 cuốn trở lên)
-                hoặc Sách Giáo Khoa, cộng trực tiếp vào chi phí giao hàng thông
-                thường.
+                Chi phí: 30.000 đồng cho toàn bộ đơn hàng trên toàn quốc .
               </p>
             </div>
           </div>

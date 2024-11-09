@@ -76,7 +76,7 @@ const KiNangSong = () => {
                       <img
                         src={`/image/${item.image}`}
                         alt="Sản phẩm"
-                        className=" h-[160px] "
+                        className=" h-[160px] ml-4 "
                       />
                     </div>
                     <div className="mt-4 text-xs cursor-pointer hover:text-gray-600  font-normal text-gray-700">

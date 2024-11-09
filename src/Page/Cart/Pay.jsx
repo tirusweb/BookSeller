@@ -6,6 +6,7 @@ import sale from "../../image/salefree.png";
 import { apiPostBill } from "../../services/Bill/Bill";
 import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
+import { toast, ToastContainer } from "react-toastify";
 
 const Pay = () => {
   const [customer, setCustomer] = useState([]);
@@ -55,6 +56,25 @@ const Pay = () => {
     }
   }, [selectedBooks]);
 
+  useEffect(() => {
+    const fetchCustomer = async () => {
+      try {
+        const response = await apiGetCustomer(username);
+        console.log(response.data);
+        if (response.data.status === 1) {
+          setCustomer(response.data.customer);
+          console.log("Customer", response.data.customer.idcus);
+
+        } else {
+          setError(response.data.msg);
+        }
+      } catch (error) {
+        setError("Không thể tải thông tin khách hàng. Vui lòng thử lại.");
+      }
+    };
+    fetchCustomer();
+  }, [username]);
+
   
 
   // lấy id khách hàng
@@ -77,7 +97,11 @@ const Pay = () => {
   
   const handleAddBill = async () => {
     if(method === "" ){
-      setShowFalse(true);
+      toast.error("Vui lòng chọn phương thức thanh toán")
+      return;
+    }
+    if(idcus === null ){
+      toast.error("Vui lòng quay lại điền thông tin địa chỉ")
       return;
     }
 
@@ -101,7 +125,8 @@ const Pay = () => {
       if (response.status === 1) {
        setShowPopup(true);
       } else {
-        setShowFalse(true)
+
+
       }
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm:", error.message);
@@ -151,6 +176,7 @@ const Pay = () => {
 
   return (
     <div className="">
+    <ToastContainer position="top-right" />
       <div className="w-screen">
         <div className="mx-14 my-8">
           <div className="grid grid-cols-10 gap-2">
@@ -393,7 +419,7 @@ const Pay = () => {
                 <input
                   id="thanhtoancod"
                   name="payment"
-                  value="Thanh toán khi nhân hàng"
+                  value="Thanh toán khi nhận hàng"
                   onChange={(e) => setMethod(e.target.value)}
                   type="radio"
                   className="ml-4"

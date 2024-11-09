@@ -9,6 +9,7 @@ import Modalks from "./Modal/Modalks";
 import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
 import { apigetDetailBook } from "../../services/detailBook/detaiBook";
+import { toast, ToastContainer } from "react-toastify";
 const Detail = () => {
   const [detail, setDetail] = useState([null]);
   const [error, setError] = useState(null);
@@ -16,8 +17,7 @@ const Detail = () => {
   const [isModalgh, setIsShowModalgh] = useState(false);
   const [isModaldt, setIsShowModaldt] = useState(false);
   const [isModalks, setIsShowModalks] = useState(false);
-  const [isPopup, setShowPopup] = useState(false);
-  const [isFalse, setShowFalse] = useState(false);
+ 
   const navigate = useNavigate();
 
   // thêm vào giỏ hàng
@@ -44,11 +44,6 @@ const Detail = () => {
   };
   const goToSlide = (index) => {
     setCurrentSlide(index);
-  };
-
-  const handleSuccess = () => {
-    setShowPopup(false);
-    window.location.reload();
   };
 
   useEffect(() => {
@@ -92,9 +87,10 @@ const Detail = () => {
     try {
       const response = await apiPostCart(data); // Gửi dữ liệu lên API thêm giỏ hàng
       if (response.status === 1) {
-        setShowPopup(true);
+       toast.success("Thêm vào giỏ hàng thành công")
       } else {
-        setShowFalse(true);
+        toast.success("Thêm vào giỏ hàng thất bại")
+
       }
     } catch (error) {
       setError(
@@ -138,6 +134,7 @@ const Detail = () => {
 
   return (
     <div className="">
+    <ToastContainer position="top-right" />
       <div className=" w-screen">
         <div className=" mx-14 my-8">
           <div className="">
@@ -512,56 +509,7 @@ const Detail = () => {
       {isModalgh && <Modalgh onclose={closeModalgh} />}
       {isModaldt && <Modaldt onclose={closeModaldt} />}
       {isModalks && <Modalks onclose={closeModalks} />}
-      {isPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <div className=" flex-col items-center justify-center">
-              <img
-                src={infor}
-                className=" mx-12 w-[100px] h-[100px]"
-                alt="Ảnh thông báo thành công"
-              />
-              <p className=" font-semibold text-xl text-gray-600">
-                {" "}
-                Đã thêm vào giỏ hàng{" "}
-              </p>
-            </div>
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={handleSuccess}
-                className="bg-green-500 font-semibold text-white px-4 py-2 rounded"
-              >
-                Xác nhận
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {isFalse && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <div className=" flex-col items-center justify-center">
-              <img
-                src={infor1}
-                className=" mx-20 w-[100px] h-[100px]"
-                alt="Ảnh thông báo thất bại"
-              />
-              <p className=" font-semibold text-xl text-gray-600">
-                {" "}
-                Vui lòng đăng nhập tài khoản{" "}
-              </p>
-            </div>
-            <div className="flex justify-center mt-4">
-              <button
-                onClick={() => setShowFalse(false)}
-                className="bg-red-500 font-semibold text-white px-4 py-2 rounded"
-              >
-                Xác nhận
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     
     </div>
   );
 };
