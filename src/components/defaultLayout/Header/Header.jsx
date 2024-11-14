@@ -3,11 +3,15 @@ import logo from "../../../image/book2.jpg";
 import avatar from "../../../image/avatar.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { apigetCartlBook } from "../../../services/Cartbook/Cartbook";
+import { apiGetNotifyByUser } from "../../../services/Notify/Notify";
 const Header = () => {
   const [isShow, setIsShow] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const [Cart, setCart] = useState([]);
+  const [notify, setNotify] = useState([]);
+  const [error, setError] = useState(null);
+
   const [username, setUsername] = useState(
     localStorage.getItem("user") || "Tài khoản"
   );
@@ -59,6 +63,49 @@ const Header = () => {
     navigate(`/tim-kiem/${title}`);
   };
 
+// lấy ra số luuuowngj thông bbaos
+  useEffect(() => {
+    const getNotify = async () => {
+      try {
+        const [responseForTrungHieu, responseForCurrentUser] = await Promise.all([
+          apiGetNotifyByUser("admin"),
+          apiGetNotifyByUser(username)
+        ]);
+
+        let combinedNotifications = [];
+        let errors = [];
+
+        // Kiểm tra phản hồi cho "trung hiếu"
+        if (responseForTrungHieu.data.status === 1) {
+          combinedNotifications = [...combinedNotifications, ...responseForTrungHieu.data.notifications];
+        } else {
+          errors.push(responseForTrungHieu.data.msg);
+        }
+
+        // Kiểm tra phản hồi cho người dùng hiện tại
+        if (responseForCurrentUser.data.status === 1) {
+          combinedNotifications = [...combinedNotifications, ...responseForCurrentUser.data.notifications];
+        } else {
+          errors.push(responseForCurrentUser.data.msg);
+        }
+
+        // Cập nhật notify với dữ liệu kết hợp
+        setNotify(combinedNotifications);
+
+        // Cập nhật tất cả lỗi nếu có
+        if (errors.length > 0) {
+          setError(errors.join(' | '));
+        }
+
+      } catch (error) {
+        setError("Lỗi khi gọi API!");
+      }
+    };
+
+    getNotify();
+  }, [username]);
+  
+
   return (
     <>
       <div className=" z-30 containe fixed left-0 right-0">
@@ -106,29 +153,35 @@ const Header = () => {
             </div>
 
             <div className="flex flex-1 pr-4 fle font-semibold items-center justify-end text-gray-500 mr-4 mt-3">
-              <a
-              href="/thong-bao"
-                className=" cursor-pointer xs:hidden lg:block"
-              >
-              
-                <div className="flex mr-4 text-sm ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                    stroke="currentColor"
-                    className="size-5 mr-1"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"
-                    />
-                  </svg>
-                  Thông báo
-                </div>
-              </a>
+              <div className=" relative xs:hidden lg:block">
+                <a
+                href="/thong-bao"
+                  className=" cursor-pointer xs:hidden lg:block"
+                >
+                
+                  <div className="flex mr-4 text-sm ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                      stroke="currentColor"
+                      className="size-5 mr-1"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"
+                      />
+                    </svg>
+                    Thông báo
+                  </div>
+                </a>
+                <p className=" left-2 absolute top-[-10px] bg-red-600  rounded-full text-center w-5 h-5 text-xs shadow-lg  text-white ">
+                    {notify.length}
+                  </p>
+
+              </div>
               <div className=" relative xs:hidden lg:block">
                 <a
                 href="/gio-hang-san-pham"

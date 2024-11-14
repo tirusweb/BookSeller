@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [fullname, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +21,7 @@ const Register = () => {
     return re.test(email);
   };
   const handleSubmit = async () => {
-    if (!name || !email || !fullname || !phone || !password || !confirmPassword) {
+    if (!name || !email ||!address || !fullname || !phone || !password || !confirmPassword) {
       setError("Vui lòng điền đầy đủ thông tin.");
       return;
     }
@@ -42,7 +43,7 @@ const Register = () => {
       setError("Mật khẩu nhập lại không khớp.");
       return;
     }
-    const data = { name, fullname , phone, email, password };
+    const data = { name, fullname ,address, phone, email, password };
 
     try {
       const response = await apiPostUser(data);
@@ -62,12 +63,12 @@ const Register = () => {
   return (
     <>
       <div className="w-screen flex items-center justify-center h-screen bg-blue-100">
-        <div className="lg:w-[90%] lg:h-[90%] xs:w-[100%] xs:h-[100%] my-0 mx-auto bg-cyan-400 shadow-xl rounded">
+        <div className="lg:w-[94%] lg:h-[94%] xs:w-[100%] xs:h-[100%] my-0 mx-auto bg-cyan-400 shadow-xl rounded">
           <div className="h-full grid grid-cols-5">
             <div className="lg:block xs:hidden col-span-3">
               <div className="flex-col flex items-center justify-center h-full bg-white">
                 <h2 className="text-center uppercase font-bold text-cyan-500">
-                  CHÀO BẠN ĐỌC ĐẾN VỚI bookhuh.COM
+                  CHÀO BẠN ĐỌC ĐẾN VỚI BOOKHUH.COM
                 </h2>
                 <img src={pia} className="lg:w-[500px] h-auto" alt="Edu" />
               </div>
@@ -75,7 +76,7 @@ const Register = () => {
             <div className="h-full w-full flex items-center justify-center xs:col-span-5 lg:col-span-2">
               <div className="h-[96%] w-[96%] bg-cyan-600 shadow-xl lg:mx-auto lg:my-0 rounded-xl">
                 <h2 className="lg:hidden xs:block mt-3 text-center font-bold text-cyan-800">
-                  CHÀO BẠN ĐỌC ĐẾN VỚI SACHHAY.COM
+                  CHÀO BẠN ĐỌC ĐẾN VỚI BOOKHUH.COM
                 </h2>
                 <h2 className="text-center uppercase mt-2 text-white font-bold">
                   ĐĂNG Ký TÀI KHOẢN
@@ -86,7 +87,7 @@ const Register = () => {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Tên người dùng..."
                     required
                   />
@@ -94,15 +95,14 @@ const Register = () => {
                     type="email"
                     value={fullname}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Nhập họ tên..."
                     required
                   />
                     <input
-                    type="email"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Nhập số điện thoại..."
                     required
                   />
@@ -110,15 +110,22 @@ const Register = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Nhập email..."
+                    required
+                  />
+                   <input
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    placeholder="Nhập địa chỉ..."
                     required
                   />
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                     placeholder="Mật khẩu..."
                     required
                   />
@@ -126,7 +133,7 @@ const Register = () => {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-[90%] px-4 py-2 mt-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
+                    className="w-[90%] px-4 py-2 mt-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-cyan-500"
                    placeholder="Xác nhận mật khẩu..."
                    required
                   />

@@ -28,7 +28,6 @@ const Footer = () => {
                     />
                   </Link>
                   <p className=" uppercase mt-6 font-bold text-2xl ml-1 text-red-500">
-                    {/* Sachhay.com */}
                   </p>
                 </div>
                 <div className="">
@@ -50,7 +49,7 @@ const Footer = () => {
                     <span className=" font-bold">Book HuH</span> nhận đặt hàng
                     trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và
                     nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống
-                    SachHay trên toàn quốc.
+                    Bookhuh trên toàn quốc.
                   </p>
                 </div>
                 <div className=" mt-4 flex items-center justify-start">

@@ -38,7 +38,7 @@ const Login = ({ onLogin }) => {
             <div className="lg:block xs:hidden col-span-3">
               <div className="flex-col flex items-center justify-center h-full bg-white">
                 <h2 className="text-center font-bold text-cyan-500">
-                  CHÀO BẠN ĐỌC ĐẾN VỚI SACHHAY.COM
+                  CHÀO BẠN ĐỌC ĐẾN VỚI BOOKHUH.COM
                 </h2>
                 <img src={pia} className="lg:w-[500px] h-auto" alt="Edu" />
               </div>
@@ -46,7 +46,7 @@ const Login = ({ onLogin }) => {
             <div className="h-full w-full flex items-center justify-center xs:col-span-5 lg:col-span-2">
               <div className="h-[90%] w-[90%] bg-cyan-600 shadow-xl lg:mx-auto lg:my-0 rounded-xl">
                 <h2 className="lg:hidden xs:block mt-3 text-center font-bold text-cyan-800">
-                  CHÀO BẠN ĐỌC ĐẾN VỚI SACHHAY.COM
+                  CHÀO BẠN ĐỌC ĐẾN VỚI BOOKHUH.COM
                 </h2>
                 <h2 className="text-center mt-20 text-white font-bold">
                   ĐĂNG NHẬP TÀI KHOẢN

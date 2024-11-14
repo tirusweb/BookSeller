@@ -10,3 +10,7 @@ export const apiPostBill = async (data) => {
     throw error; 
   }
 };
+
+export const apiGetBillByStatus = (idcus, status) => {
+  return http.get(`/billstatus.php?idcus=${idcus}&status=${status}`);
+};

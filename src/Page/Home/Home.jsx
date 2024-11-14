@@ -6,8 +6,7 @@ import c4 from "../../image/course4.webp";
 import c5 from "../../image/sourse7.webp";
 import banner1 from "../../image/banner1.webp";
 import banner2 from "../../image/banner2.webp";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 // ảnh sale off
 // API
 import { getListBooks } from "../../services/Listbook/Listbook";
@@ -83,7 +82,7 @@ const Home = () => {
   const totalSlides = 5;
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
   // gọi API danh sách sản phẩm
@@ -324,7 +323,7 @@ const Home = () => {
                       </p>
                       <p className="text-gray-600 font-normal text-xs ">
                         {" "}
-                        đã bán : {item.sold}
+                        còn hàng : {item.sold}
                       </p>
                     </div>
                   </div>

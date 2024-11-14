@@ -96,7 +96,7 @@ const Product = () => {
                       </p>
                       <p className="text-gray-600 font-normal text-xs ">
                         {" "}
-                        đã bán : {item.sold}
+                        con hàng : {item.sold}
                       </p>
                     </div>
                   </div>
