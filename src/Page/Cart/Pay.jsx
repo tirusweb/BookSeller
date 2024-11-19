@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { apiGetCustomer } from "../../services/Address/Address";
 import { apiGetVoucher } from "../../services/Voucher/Voucher";
 import sale from "../../image/salefree.png";
@@ -16,7 +16,7 @@ const Pay = () => {
     localStorage.getItem("user") || "Tài khoản"
   );
   const [isPopup, setShowPopup] = useState(false);
-  const [isFalse , setShowFalse] = useState(false);
+  const [isFalse, setShowFalse] = useState(false);
   const location = useLocation();
   const { selectedBooks, totalAmount } = location.state || {};
   const [saleOf, setSaleOf] = useState("");
@@ -44,9 +44,8 @@ const Pay = () => {
       const newprice = selectedBooks.map((cart) => cart.price);
 
       const totalPrice = selectedBooks.map((cart) => {
-        return cart.price * cart.quantity - (30000 / selectedBooks.length);
+        return cart.price * cart.quantity - 30000 / selectedBooks.length;
       }, 0);
-
 
       setQuality(newQuantities);
       setTotal(totalPrice);
@@ -64,7 +63,6 @@ const Pay = () => {
         if (response.data.status === 1) {
           setCustomer(response.data.customer);
           console.log("Customer", response.data.customer.idcus);
-
         } else {
           setError(response.data.msg);
         }
@@ -75,8 +73,6 @@ const Pay = () => {
     fetchCustomer();
   }, [username]);
 
-  
-
   // lấy id khách hàng
   useEffect(() => {
     if (Array.isArray(customer) && customer.length > 0) {
@@ -84,24 +80,22 @@ const Pay = () => {
       setIdcus(customer[0].idcus);
     } else {
       // Nếu không có customer, có thể đặt idcus là null hoặc giá trị mặc định
-      setIdcus(null); 
+      setIdcus(null);
     }
   }, [customer]);
 
   const handleSuccess = () => {
     setShowPopup(false);
-    navigate("/")
-  }
+    navigate("/");
+  };
 
-  
-  
   const handleAddBill = async () => {
-    if(method === "" ){
-      toast.error("Vui lòng chọn phương thức thanh toán")
+    if (method === "") {
+      toast.error("Vui lòng chọn phương thức thanh toán");
       return;
     }
-    if(idcus === null ){
-      toast.error("Vui lòng quay lại điền thông tin địa chỉ")
+    if (idcus === null) {
+      toast.error("Vui lòng quay lại điền thông tin địa chỉ");
       return;
     }
 
@@ -114,23 +108,23 @@ const Pay = () => {
       status: "Đã đặt",
       image,
       title,
-      price, 
+      price,
     };
-  
+
     console.log("data", data);
-  
+
     try {
       const response = await apiPostBill(data);
       console.log("Response from server:", response);
       if (response.status === 1) {
-       setShowPopup(true);
+        setShowPopup(true);
       } else {
-
-
       }
     } catch (error) {
       console.error("Lỗi khi thêm sản phẩm:", error.message);
-      setError("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.");
+      setError(
+        "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại."
+      );
     }
   };
 
@@ -143,7 +137,6 @@ const Pay = () => {
         if (response.data.status === 1) {
           setCustomer(response.data.customer);
           console.log("Customer", response.data.customer.idcus);
-
         } else {
           setError(response.data.msg);
         }
@@ -158,17 +151,36 @@ const Pay = () => {
   useEffect(() => {
     const fetchVoucher = async () => {
       try {
-        const response = await apiGetVoucher(username);
-        console.log(response.data);
-        if (response.data.status === 1) {
-          setVoucher(response.data.customer);
+        const [responseForTrungHieu, responseForCurrentUser] = await Promise.all([
+          apiGetVoucher("Tất cả"),
+          apiGetVoucher(username)
+        ]);
+        let combinedNotifications = [];
+        let errors = [];
+
+        if (responseForTrungHieu.data.status === 1) {
+          combinedNotifications = [...combinedNotifications, ...responseForTrungHieu.data.customer];
         } else {
-          setError(response.data.msg);
+          errors.push(responseForTrungHieu.data.msg);
+        }
+
+        // Kiểm tra phản hồi cho người dùng hiện tại
+        if (responseForCurrentUser.data.status === 1) {
+          combinedNotifications = [...combinedNotifications, ...responseForCurrentUser.data.customer];
+        } else {
+          errors.push(responseForCurrentUser.data.msg);
+        }
+
+        setVoucher(combinedNotifications);
+
+        if (errors.length > 0) {
+          setError(errors.join(' | '));
         }
       } catch (error) {
-        setError("Không thể tải thông tin khách hàng. Vui lòng thử lại.");
+        setError("Không thể tải voucher . Vui lòng thử lại.");
       }
     };
+
     fetchVoucher();
   }, [username]);
 
@@ -176,7 +188,7 @@ const Pay = () => {
 
   return (
     <div className="">
-    <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" />
       <div className="w-screen">
         <div className="mx-14 my-8">
           <div className="grid grid-cols-10 gap-2">
@@ -203,66 +215,72 @@ const Pay = () => {
                 </h2>
               </div>
             </div>
-            <div className=" col-span-10 bg-white rounded hover:bg-gray-100  shadow-lg">
-              {customer.slice(0,1).map((cus) => (
-                <div
-                  onClick={() => handleChange(cus.idcus)}
-                  key={cus.idcus}
-                  className="  flex cursor-pointer items-center justify-between mx-10 my-2"
-                >
-                  <div>
-                    <div className=" flex items-center justify-start">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2.5}
-                        stroke="currentColor"
-                        className="size-4 text-red-600 "
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                        />
-                      </svg>
+            {customer && customer.length > 0 ? (
+              <div className=" col-span-10 bg-white rounded hover:bg-gray-100  shadow-lg">
+                {customer.slice(0, 1).map((cus) => (
+                  <div
+                    onClick={() => handleChange(cus.idcus)}
+                    key={cus.idcus}
+                    className="  flex cursor-pointer items-center justify-between mx-10 my-2"
+                  >
+                    <div>
+                      <div className=" flex items-center justify-start">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2.5}
+                          stroke="currentColor"
+                          className="size-4 text-red-600 "
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                          />
+                        </svg>
 
-                      <p className=" text-sm font-medium ml-2 text-gray-700">
-                        Địa chỉ nhân hàng
+                        <p className=" text-sm font-medium ml-2 text-gray-700">
+                          Địa chỉ nhân hàng
+                        </p>
+                      </div>
+                      <p className=" ml-6 text-sm font-normal text-gray-500">
+                        {cus.fullname} | {cus.phone}
+                      </p>
+                      <p className=" ml-6 text-sm font-normal text-gray-500">
+                        {cus.address}
+                      </p>
+                      <p className=" ml-6 text-sm font-normal text-gray-500">
+                        {cus.ward}-{cus.distric}-{cus.city}
                       </p>
                     </div>
-                    <p className=" ml-6 text-sm font-normal text-gray-500">
-                      {cus.fullname} | {cus.phone}
-                    </p>
-                    <p className=" ml-6 text-sm font-normal text-gray-500">
-                      {cus.address}
-                    </p>
-                    <p className=" ml-6 text-sm font-normal text-gray-500">
-                      {cus.ward}-{cus.distric}-{cus.city}
-                    </p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                      stroke="currentColor"
+                      className="size-6 text-red-600"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
                   </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                    stroke="currentColor"
-                    className="size-6 text-red-600"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className=" col-span-10 bg-white rounded py-3 hover:bg-gray-100  shadow-lg">
+                <Link className=" py-8 ml-10 px-2 font-medium text-gray-500" to = {"/dia-chi"} > Vui lòng thêm địa chỉ khách hàng </Link>
+              </div>
+            )}
             <div className=" col-span-10 bg-white rounded shadow-lg">
               <div className=" mx-10 flex items-center justify-start">
                 <svg
@@ -512,7 +530,10 @@ const Pay = () => {
                 className=" mx-12 w-[100px] h-[100px]"
                 alt="Ảnh thông báo thành công"
               />
-              <p className=" font-semibold text-xl text-gray-600"> Đã đặt hàng thành công </p>
+              <p className=" font-semibold text-xl text-gray-600">
+                {" "}
+                Đã đặt hàng thành công{" "}
+              </p>
             </div>
             <div className="flex justify-center mt-4">
               <button
@@ -529,8 +550,10 @@ const Pay = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-lg">
             <div className=" flex-col items-center justify-center">
-              
-              <p className=" font-semibold text-xl text-gray-600"> Vui lòng chọn hình thức thanh toán </p>
+              <p className=" font-semibold text-xl text-gray-600">
+                {" "}
+                Vui lòng chọn hình thức thanh toán{" "}
+              </p>
             </div>
             <div className="flex justify-center mt-4">
               <button
@@ -544,7 +567,6 @@ const Pay = () => {
         </div>
       )}
     </div>
-   
   );
 };
 

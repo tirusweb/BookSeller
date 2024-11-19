@@ -28,6 +28,8 @@ import Vanhoc from "./Page/Type/Literature";
 import Thieunhi from "./Page/Type/Children";
 import KiNangSong from "./Page/Type/SkillLife";
 import ForgotPassword from "./Login/ForgotPass";
+import ChinhSachDV from "./Page/Polixy/Csdv";
+import Gioithieu from "./Page/Polixy/Gioithieu";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -228,6 +230,26 @@ function App() {
               <DefaultLayout children={<KiNangSong />} />
             ) : (
               <Navigate to="/danh-muc-ki-nang-song" />
+            )
+          }
+        />
+          <Route
+          path="/dieu-khoa-dich-vu"
+          element={
+            isAuthenticated ? (
+              <DefaultLayout children={<ChinhSachDV />} />
+            ) : (
+              <Navigate to="/dieu-khoa-dich-vu" />
+            )
+          }
+        />
+        <Route
+          path="/gioi-thieu-bookhuh"
+          element={
+            isAuthenticated ? (
+              <DefaultLayout children={<Gioithieu />} />
+            ) : (
+              <Navigate to="/gioi-thieu-bookhuh" />
             )
           }
         />

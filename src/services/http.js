@@ -1,9 +1,10 @@
 import axios from "axios";
 
 
+
 const http = axios.create({
-    // baseURL:  `http://localhost/API/`, 
-    baseURL:  `http://nguyentrunghieu.kesug.com/API/`, 
+    baseURL:  `http://localhost/API/`, 
+    // baseURL:  `http://trunghieu.name.vn/API`, 
     timeout: 10000, 
 });
 

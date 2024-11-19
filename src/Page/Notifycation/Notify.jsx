@@ -13,7 +13,7 @@ const Notify = () => {
     const getNotify = async () => {
       try {
         const [responseForTrungHieu, responseForCurrentUser] = await Promise.all([
-          apiGetNotifyByUser("admin"),
+          apiGetNotifyByUser("Tất cả"),
           apiGetNotifyByUser(username)
         ]);
 

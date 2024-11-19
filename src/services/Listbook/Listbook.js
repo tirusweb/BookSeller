@@ -1,5 +1,5 @@
 import http from "../http";
 
 export const getListBooks = () => {
-  return http.get('/books');
+  return http.get('/lists.php');
 };

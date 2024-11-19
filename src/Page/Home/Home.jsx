@@ -331,9 +331,9 @@ const Home = () => {
               ))}
               <div className="col-span-5 rounded ">
                 <div className=" flex items-center justify-center ">
-                  <a href="/tat-ca-san-pham" className=" text-white  shadow-lg font-bold text-lg uppercase hover:bg-red-600 bg-red-700 px-8 py-2 rounded my-2">
+                  <Link to={"/tat-ca-san-pham"} className=" text-white  shadow-lg font-bold text-lg uppercase hover:bg-red-600 bg-red-700 px-8 py-2 rounded my-2">
                     Xem Thêm
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

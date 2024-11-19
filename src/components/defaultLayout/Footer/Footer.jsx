@@ -102,7 +102,7 @@ const Footer = () => {
               <h1 className=" mt-4 mb-3 font-semibold text-sm text-black uppercase">
                 Dịch vụ
               </h1>
-              <Link to="">
+              <Link to="/dieu-khoa-dich-vu">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
                   Điều khoản dịch vụ
                 </p>
@@ -117,7 +117,7 @@ const Footer = () => {
                   Chính sách bảo mật thanh toán
                 </p>
               </Link>
-              <Link to="">
+              <Link to="/gioi-thieu-bookhuh">
                 <p className=" mt-2 text-sm cursor-pointer text-gray-700 font-normal hover:text-red-400 hover:ml-2 transition-transform duration-300 transform hover:translate-x-1">
                   Giới thiệu BookHuH
                 </p>
