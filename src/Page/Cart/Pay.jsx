@@ -312,8 +312,8 @@ const Pay = () => {
                           src={`/image/${cart.image_cart}`}
                           alt="cart"
                         />
-                        <div>
-                          <p className="text-xs font-normal">{cart.title}</p>
+                        <div className=" ml-4 w-[500px]">
+                          <p className="text-xs font-semibold">{cart.title}</p>
                           <div className="flex items-center space-x-2">
                             <span className="text-black-500 text-sm font-medium">
                               {Number(cart.price).toLocaleString("vi-VN")} đ
@@ -446,7 +446,7 @@ const Pay = () => {
                   className=" ml-2 block font-medium text-sm text-red-600"
                   htmlFor="thanhtoancod"
                 >
-                  Thanh toán khi nhân hàng
+                  Thanh toán khi nhận hàng
                 </label>
               </div>
             </div>
@@ -506,7 +506,7 @@ const Pay = () => {
                 </div>
                 <div className=" mt-4 flex items-center justify-between mx-48">
                   <p className=" text-sm font-medium text-gray-500  ">
-                    Nhấn "Đặt hàng" đồng nghĩa với bạn đồng ý với các điều khoản
+                    Nhấn <b>"Đặt hàng"</b> đồng nghĩa với bạn đồng ý với các điều khoản
                     của chúng tôi{" "}
                   </p>
                   <button

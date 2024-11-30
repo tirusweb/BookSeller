@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getListBooks } from "../../services/Listbook/Listbook";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Product = () => {
     const [books, setBooks] = useState([]);
@@ -39,8 +39,8 @@ const Product = () => {
         <div className=" w-screen">
           <div className=" mx-14 my-8">
             <div>
-            <div className=" mt-2 grid grid-cols-5 gap-2">
-              <div className=" col-span-5 bg-white shadow-lg rounded">
+            <div className=" mt-2 grid grid-cols-10 gap-2">
+              <div className=" col-span-10 bg-white shadow-lg rounded">
                 <div className=" ml-4 py-4 flex items-center justify-start">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ const Product = () => {
                 <div
                   onClick={() => handleDetail(item)}
                   key={item.id}
-                  className=" col-span-1 cursor-pointer bg-white shadow-lg rounded transform transition-transform duration-300 hover:translate-y-1"
+                  className=" col-span-2 cursor-pointer bg-white shadow-lg rounded transform transition-transform duration-300 hover:translate-y-1"
                 >
                   <div className="">
                     <img
@@ -102,7 +102,9 @@ const Product = () => {
                   </div>
                 </div>
               ))}
+            
             </div>
+
             </div>
           </div>
         </div>

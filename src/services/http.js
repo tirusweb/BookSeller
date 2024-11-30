@@ -3,8 +3,8 @@ import axios from "axios";
 
 
 const http = axios.create({
-    baseURL:  `http://localhost/API/`, 
-    // baseURL:  `http://trunghieu.name.vn/API`, 
+    // baseURL:  `http://localhost/MyLTWEB/bookseller/API/`, 
+    baseURL:  `https://trunghieu.name.vn/API`, 
     timeout: 10000, 
 });
 

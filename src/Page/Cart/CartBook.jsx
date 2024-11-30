@@ -13,8 +13,6 @@ const CartBook = () => {
   const [error, setError] = useState(null);
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
   const [bookToDelete, setBookToDelete] = useState(null);
-  const [isFalse, setShowFalse] = useState(false);
-
   const [username, setUsername] = useState(
     localStorage.getItem("user") || "Tài khoản"
   );

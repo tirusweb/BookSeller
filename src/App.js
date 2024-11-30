@@ -30,6 +30,7 @@ import KiNangSong from "./Page/Type/SkillLife";
 import ForgotPassword from "./Login/ForgotPass";
 import ChinhSachDV from "./Page/Polixy/Csdv";
 import Gioithieu from "./Page/Polixy/Gioithieu";
+import Panigation1 from "./Page/AllProduct/Panigation1";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -173,6 +174,16 @@ function App() {
             )
           }
         />
+          {/* <Route
+          path="/phan-trang1"
+          element={
+            isAuthenticated ? (
+              <DefaultLayout children={<Panigation1 />} />
+            ) : (
+              <Navigate to="/phan-trang1" />
+            )
+          }
+        /> */}
          <Route
           path="/don-hang-cua-toi"
           element={

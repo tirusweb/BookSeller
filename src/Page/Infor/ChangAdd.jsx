@@ -4,6 +4,7 @@ import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
 import { apiUpdateCustomer } from "../../services/Address/Address";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 const ChangAddress = () => {
   const [city, setCity] = useState([]);
   const [district, setDistrict] = useState([]);
@@ -48,18 +49,32 @@ const ChangAddress = () => {
       ward: isWard ? isWard.full_name : "",
     };
 
+    if (!fullname.trim() || !phone.trim() || !address.trim()) {
+      toast.error("Vui lòng điền đầy đủ thông tin.");
+      return;
+    }
+    const regexPhoneNumber = /(0|0[3|5|7|8|9])+([0-9]{8})\b/g;
+
+    if(!phone.match(regexPhoneNumber)) {
+      toast.error(" lỗi số điện thoại ")
+    }
+
+
+
 
     try{
         const response = await apiUpdateCustomer(idcus ,username , data);
 
         if(response.data.status === 1){
-            setShowPopup(true);
+          toast.success("Thêm thông tin khách hàng thánh công !")
         }else{
-            setShowFalse(true);
+          toast.success("Thêm thông tin khách hàng thất bại !")
+
         }
         
     }catch(error){
-        setError(" Không update được địa chỉ khách hàng");
+      toast.success("lỗi API !")
+
     }
   };
 
@@ -119,6 +134,7 @@ const ChangAddress = () => {
   return (
     <>
       <div className="w-screen">
+      <ToastContainer position="top-right" />
         <div className="mx-14 my-8">
           <div className="grid grid-cols-10 gap-4">
             <div className="col-span-3 row-span-1">
@@ -276,7 +292,7 @@ const ChangAddress = () => {
           </div>
         </div>
       </div>
-      {isPopup && (
+      {/* {isPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-lg">
             <div className=" flex-col items-center justify-center">
@@ -325,7 +341,7 @@ const ChangAddress = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

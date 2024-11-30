@@ -30,20 +30,7 @@ const Footer = () => {
                   <p className=" uppercase mt-6 font-bold text-2xl ml-1 text-red-500">
                   </p>
                 </div>
-                <div className="">
-                  <p className=" font-normal text-black text-sm">
-                    {" "}
-                    Trang web được thực hiện bởi 2 thành viên nhóm 7 gồm :{" "}
-                  </p>
-                  <p className=" font-medium text-red-700 text-sm ">
-                    {" "}
-                    - Nguyễn Trung Hiếu - 21103100097
-                  </p>
-                  <p className="font-medium text-red-700 text-sm ">
-                    {" "}
-                    - Trần Thị Hồng - 211031000098
-                  </p>
-                </div>
+             
                 <div className=" mt-1">
                   <p className=" text-justify tex-sm font-normal">
                     <span className=" font-bold">Book HuH</span> nhận đặt hàng
@@ -287,7 +274,7 @@ const Footer = () => {
         
         </div>
         <div className="flex justify-center items-center text-gray-500 py-4">
-          © copyright : nguyentrunghieu&tranthihong
+          © copyright : Nguyễn Trung Hiếu
         </div>
       </div>
     </>

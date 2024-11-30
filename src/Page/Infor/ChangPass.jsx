@@ -3,7 +3,7 @@ import infor from "../../../src/image/inforsu.png";
 import infor1 from "../../../src/image/inforfa.png";
 import { apiChangPass } from "../../services/User/User";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const ChangPass = () => {
   const [error, setError] = useState(null);
@@ -43,6 +43,8 @@ const ChangPass = () => {
       setError("Mật khẩu mới phải khác mật khẩu cũ.");
       return;
     }
+
+    
   
 
     const data = {
@@ -76,6 +78,7 @@ const ChangPass = () => {
   return (
     <>
       <div className="">
+      <ToastContainer position="top-right" />
         <div className=" w-screen">
           <div className=" mx-14 my-8">
             <div className="">
